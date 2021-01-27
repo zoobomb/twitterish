@@ -1,10 +1,12 @@
-import { dbService } from "myFirebase";
+import { dbService, storageService } from "myFirebase";
 import React, { useEffect, useState } from "react";
 import Tweet from "components/Tweet";
+import { v4 as uuidv4 } from "uuid";
 
 const Home = ({ userObj }) => {
   const [tweet, setTweet] = useState("");
   const [tweets, setTweets] = useState([]);
+  const [attachment, setAttachment] = useState();
   /* oldschool...
   const getTweets = async () => {
     const dbTweets = await dbService.collection("tweets").get();
@@ -34,12 +36,24 @@ const Home = ({ userObj }) => {
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    await dbService.collection("tweets").add({
+    let attachmentUrl = "";
+    if (attachment !== "") {
+      const attachmentRef = storageService
+        .ref()
+        .child(`${userObj.uid}/${uuidv4()}`);
+      const response = await attachmentRef.putString(attachment, "data_url");
+      attachmentUrl = await response.ref.getDownloadURL();
+    }
+    const tweetObj = {
       text: tweet,
       createAt: Date.now(),
       creatorId: userObj.uid,
-    });
+      attachmentUrl,
+    };
+
+    await dbService.collection("tweets").add(tweetObj);
     setTweet("");
+    setAttachment("");
   };
 
   const onChange = (event) => {
@@ -47,8 +61,24 @@ const Home = ({ userObj }) => {
     // console.log(tweet);
   };
 
-  //   console.log(tweets);
+  const onFileChange = (event) => {
+    const {
+      target: { files },
+    } = event;
+    const myFile = files[0];
+    const reader = new FileReader(); // file api
+    reader.onloadend = (finishedEvent) => {
+      const {
+        currentTarget: { result },
+      } = finishedEvent;
+      setAttachment(result);
+    };
+    reader.readAsDataURL(myFile);
+  };
 
+  const onClearAttachment = () => {
+    setAttachment(null);
+  };
   return (
     <div>
       <form onSubmit={onSubmit}>
@@ -59,7 +89,14 @@ const Home = ({ userObj }) => {
           value={tweet}
           onChange={onChange}
         />
+        <input type='file' accept='image/*' onChange={onFileChange} />
         <input type='submit' value='Tweet' />
+        {attachment && (
+          <div>
+            <img src={attachment} width='50px' />
+            <button onClick={onClearAttachment}>Clear</button>
+          </div>
+        )}
       </form>
       <div>
         {tweets.map((obj) => (
