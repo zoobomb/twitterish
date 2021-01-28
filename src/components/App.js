@@ -27,8 +27,14 @@ function App() {
 
   const refreshUser = () => {
     const user = authService.currentUser;
+    setUserObj({
+      displayName: user.displayName,
+      uid: user.uid,
+      updateProfile: (args) => user.updateProfile(args),
+    });
     // setUserObj(Object.assign({}, user)) // assign {} to user, react.js recognise the change and re-render
     console.log(authService.currentUser.displayName);
+    console.log(userObj);
   };
 
   return (
