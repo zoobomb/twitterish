@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-# twitterihs
-Cloning Twitter with React and Firebase
-
-
-https://firebase.google.com/docs/reference/js/firebase.auth.Auth?authuser=0
-=======
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -75,4 +68,3 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
->>>>>>> 89ec83067fdf762e01732b276c49667422680523
