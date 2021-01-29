@@ -1,5 +1,7 @@
 import { dbService, storageService } from "myFirebase";
 import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
 const Tweet = ({ tweetObj, isOwner }) => {
   const [editing, setEditing] = useState(false);
@@ -29,32 +31,40 @@ const Tweet = ({ tweetObj, isOwner }) => {
   };
 
   return (
-    <div>
+    <div className='tweet'>
       {editing ? (
         <>
-          <form onSubmit={onSubmit}>
+          <form onSubmit={onSubmit} className='container tweetEdit'>
             <input
               type='text'
               placeholder=''
               value={newTweet}
               required
+              autofocus
               onChange={onChange}
+              className='formInput'
             />
-            <input type='submit' value='Update Tweet' />
+            <input type='submit' value='Update Tweet' className='formBtn' />
           </form>
-          <button onClick={toggleEditing}>Cancel</button>
+          <span onClick={toggleEditing} className='formBtn cancelBtn'>
+            Cancel
+          </span>
         </>
       ) : (
         <>
           <h4>{tweetObj.text}</h4>
-          {tweetObj.attachmentUrl && (
-            <img src={tweetObj.attachmentUrl} width='200px' />
-          )}
+          {tweetObj.attachmentUrl && <img src={tweetObj.attachmentUrl} />}
           {isOwner && (
-            <>
-              <button onClick={toggleEditing}>Edit</button>
-              <button onClick={onDeleteClick}>Delete</button>
-            </>
+            <div class='tweet__actions'>
+              <span onClick={onDeleteClick}>
+                <FontAwesomeIcon icon={faTrash} />
+                Delete
+              </span>
+              <span onClick={toggleEditing}>
+                <FontAwesomeIcon icon={faPencilAlt} />
+                Edit
+              </span>
+            </div>
           )}
         </>
       )}

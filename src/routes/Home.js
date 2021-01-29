@@ -34,9 +34,9 @@ const Home = ({ userObj }) => {
   }, []); // component is mounted
 
   return (
-    <div>
+    <div className='container'>
       <TweetFactory userObj={userObj} />
-      <div>
+      <div style={{ marginTop: 30 }}>
         {tweets.map((obj) => (
           <Tweet
             key={obj.id}
