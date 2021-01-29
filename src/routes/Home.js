@@ -1,4 +1,4 @@
-import { dbService, storageService } from "myFirebase";
+import { dbService } from "myFirebase";
 import React, { useEffect, useState } from "react";
 import Tweet from "components/Tweet";
 import TweetFactory from "components/TweetFactory";

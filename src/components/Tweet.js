@@ -53,7 +53,9 @@ const Tweet = ({ tweetObj, isOwner }) => {
       ) : (
         <>
           <h4>{tweetObj.text}</h4>
-          {tweetObj.attachmentUrl && <img src={tweetObj.attachmentUrl} />}
+          {tweetObj.attachmentUrl && (
+            <img src={tweetObj.attachmentUrl} alt='attached file' />
+          )}
           {isOwner && (
             <div class='tweet__actions'>
               <span onClick={onDeleteClick}>

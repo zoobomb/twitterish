@@ -22,7 +22,7 @@ const Profile = ({ userObj, refreshUser }) => {
 
   useEffect(() => {
     getMyTweet();
-  }, []);
+  });
 
   const onChange = (event) => {
     const {

@@ -48,7 +48,10 @@ function App() {
       ) : (
         "Initialising.........."
       )}
-      <footer> &copy; Twitterish {new Date().getFullYear()} </footer>
+      <footer className='footer'>
+        {" "}
+        &copy; Twitterish {new Date().getFullYear()}{" "}
+      </footer>
     </>
   );
 }

@@ -1,10 +1,6 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faTwitter,
-  faGoogle,
-  faGithub,
-} from "@fortawesome/free-brands-svg-icons";
+import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 
 import AuthForm from "components/AuthForm";
 import AuthSocial from "components/AuthSocial";
@@ -19,9 +15,7 @@ const Auth = () => {
         style={{ marginBottom: 30 }}
       />
       <AuthForm />
-      <div className='authBtns'>
-        <AuthSocial />
-      </div>
+      <AuthSocial />
     </div>
   );
 };

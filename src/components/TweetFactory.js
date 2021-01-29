@@ -84,6 +84,7 @@ const TweetFactory = ({ userObj }) => {
         <div className='factoryForm__attachment'>
           <img
             src={attachment}
+            alt='file preview'
             style={{
               backgroundImage: attachment,
             }}
