@@ -1,8 +1,6 @@
 import { authService } from "myFirebase";
 import React, { useState } from "react";
 
-// const inputStyles = {};
-
 const AuthForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
